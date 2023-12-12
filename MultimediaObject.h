@@ -7,6 +7,7 @@
 class MultimediaObject {
 public:
     MultimediaObject(std::string, std::string);  // Constructor
+    MultimediaObject(); // Default constructor
     ~MultimediaObject(); // Destructor
 
     std::string getName() const; // Getter for name
@@ -17,7 +18,9 @@ public:
 
     void print(std::ostream& out) const; // Print method
 
-private:
+    virtual void play() const = 0; // Play method
+
+protected:
     std::string name;
     std::string filename;
 };

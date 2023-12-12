@@ -2,6 +2,7 @@
 
 // Constructor
 MultimediaObject::MultimediaObject(std::string name, std::string filename) : name(name), filename(filename) {}
+MultimediaObject::MultimediaObject() : name(""), filename("") {}
 
 // Destructor
 MultimediaObject::~MultimediaObject() {}
