@@ -1,10 +1,6 @@
 #include "Video.h"
 
-Video::Video(std::string name, std::string filename, int duration) {
-    MultimediaObject::setName(name);
-    MultimediaObject::setFilename(filename);
-    this->duration = duration;
-}
+Video::Video(std::string name, std::string filename, int duration) : MultimediaObject(name, filename), duration(duration) {}
 
 Video::~Video() {}
 

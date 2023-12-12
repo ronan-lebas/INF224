@@ -1,11 +1,6 @@
 #include "Image.h"
 
-Image::Image(std::string name, std::string filename, int width, int height) {
-    MultimediaObject::setName(name);
-    MultimediaObject::setFilename(filename);
-    this->width = width;
-    this->height = height;
-}
+Image::Image(std::string name, std::string filename, int width, int height) : MultimediaObject(name, filename), width(width), height(height) {}
 
 Image::~Image() {
 }
