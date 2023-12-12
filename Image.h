@@ -1,3 +1,6 @@
+#ifndef IMAGE_H
+#define IMAGE_H
+
 #include "MultimediaObject.h"
 
 class Image : public MultimediaObject {
@@ -18,3 +21,4 @@ class Image : public MultimediaObject {
         void play() const;
         
 };
+#endif

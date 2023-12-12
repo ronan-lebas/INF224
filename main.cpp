@@ -7,6 +7,7 @@
 #include "MultimediaObject.h"
 #include "Image.h"
 #include "Video.h"
+#include "Movie.h"
 using namespace std;
 
 int main(int argc, const char* argv[])
@@ -22,10 +23,17 @@ int main(int argc, const char* argv[])
     objects[2] = new Image("Image2", "image2.jpg", 100, 200);
     objects[3] = new Video("Video2", "video2.mp4", 60);
     objects[4] = new Image("Image3", "image3.jpg", 100, 200);
-    
+
     for(int i=0; i<number; i++){
         objects[i]->print(std::cout);
     }
+
+    std::cout << "Film :" << std::endl;
+
+    int chapters[3] = {10, 20, 30};
+    Movie * movie = new Movie("Movie", "movie.mp4", 120, 3, chapters);
+    movie->print(std::cout);
+    movie->printChapter(std::cout);
 
     return 0;
 }

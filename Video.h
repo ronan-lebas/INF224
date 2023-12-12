@@ -1,3 +1,5 @@
+#ifndef VIDEO_H
+#define VIDEO_H
 #include "MultimediaObject.h"
 
 class Video : public MultimediaObject {
@@ -11,3 +13,4 @@ class Video : public MultimediaObject {
         void print(std::ostream& out) const;
         void play() const;
 };
+#endif
