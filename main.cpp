@@ -35,5 +35,8 @@ int main(int argc, const char* argv[])
     movie->print(std::cout);
     movie->printChapter(std::cout);
 
+    Movie * movie2 = new Movie(*movie);
+    movie2->print(std::cout);
+
     return 0;
 }

@@ -4,6 +4,8 @@ Movie::Movie(std::string name, std::string filename, int duration) : Video(name,
 
 Movie::Movie(std::string name, std::string filename, int duration, int numberOfChapters, int * chapters) : Video(name, filename, duration), numberOfChapters(numberOfChapters), chapters(chapters) {}
 
+Movie::Movie(const Movie& movie) : Video(movie), numberOfChapters(movie.numberOfChapters), chapters(movie.chapters) {}
+
 Movie::~Movie() {
     delete[] chapters;
 }
@@ -25,4 +27,5 @@ void Movie::printChapter(std::ostream& out) const {
     for (int i = 0; i < numberOfChapters; i++) {
         out << "Chapitre " << i << " : " << chapters[i] << std::endl;
     }
+
 }

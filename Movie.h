@@ -8,6 +8,7 @@ class Movie : public Video {
 public:
     Movie(std::string name, std::string filename, int duration);
     Movie(std::string name, std::string filename, int duration, int numberOfChapters, int * chapters);
+    Movie(const Movie& movie);
     ~Movie();
     int getNumberOfChapters() const;
     int getChapter(int index) const;
