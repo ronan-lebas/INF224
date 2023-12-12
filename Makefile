@@ -14,7 +14,7 @@ PROG = myprog
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
-SOURCES = MyClass.cpp main.cpp
+SOURCES = MultimediaObject.cpp main.cpp
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
@@ -73,7 +73,7 @@ tar:
 # l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)
 #
 depend-${PROG}:
-	${CXX} ${CXXFLAGS} -MM ${SOURCES} > depend-${PROG}
+	(${CXX} ${CXXFLAGS} -MM ${SOURCES}) > depend-${PROG}
 
 
 ###########################################
