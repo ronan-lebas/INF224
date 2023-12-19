@@ -7,12 +7,13 @@
 class Movie : public Video {
 public:
     Movie(std::string name, std::string filename, int duration);
-    Movie(std::string name, std::string filename, int duration, int numberOfChapters, int * chapters);
+    Movie(std::string name, std::string filename, int duration, int numberOfChapters, const int * chapters);
     Movie(const Movie& movie);
     ~Movie();
     int getNumberOfChapters() const;
     int getChapter(int index) const;
-    void setChapters(int newNumberOfChapters, int newChapters[]);
+    const int * getChapters() const;
+    void setChapters(int newNumberOfChapters, const int newChapters[]);
     void printChapter(std::ostream& out) const;
 
 private:
