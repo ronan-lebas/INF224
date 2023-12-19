@@ -6,7 +6,7 @@
 
 class MultimediaObject {
 public:
-    MultimediaObject(std::string, std::string);  // Constructor
+    MultimediaObject(const std::string, const std::string);  // Constructor
     MultimediaObject(); // Default constructor
     ~MultimediaObject(); // Destructor
 

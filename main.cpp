@@ -8,6 +8,7 @@
 #include "Image.h"
 #include "Video.h"
 #include "Movie.h"
+#include "Group.h"
 using namespace std;
 
 int main(int argc, const char* argv[])
@@ -37,6 +38,16 @@ int main(int argc, const char* argv[])
 
     Movie * movie2 = new Movie(*movie);
     movie2->print(std::cout);
+
+    std::cout << "Test des groupes" << std::endl;
+
+    Group * group = new Group("Groupe de test");
+
+    group->push_back(objects[0]);
+    group->push_back(objects[1]);
+    group->push_back(objects[2]);
+
+    group->print(std::cout);
 
     return 0;
 }
