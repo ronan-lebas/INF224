@@ -39,15 +39,23 @@ int main(int argc, const char* argv[])
     Movie * movie2 = new Movie(*movie);
     movie2->print(std::cout);
 
-    std::cout << "Test des groupes" << std::endl;
+    std::cout << "-----Test des groupes-----" << std::endl;
 
     Group * group = new Group("Groupe de test");
 
-    group->push_back(objects[0]);
-    group->push_back(objects[1]);
-    group->push_back(objects[2]);
+    group->push_back((ObjectPtr) objects[0]);
+    group->push_back((ObjectPtr) objects[1]);
+    group->push_back((ObjectPtr) objects[2]);
 
     group->print(std::cout);
+
+    Group * group2 = new Group(*group);
+    group2->push_back((ObjectPtr) objects[3]);
+    group2->push_back((ObjectPtr) objects[4]);
+    group2->print(std::cout);
+
+    delete group2;
+    delete group;
 
     return 0;
 }

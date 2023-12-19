@@ -3,9 +3,11 @@
 #include <list>
 #include <iostream>
 #include <string>
+#include <memory>
 #include "MultimediaObject.h"
+using ObjectPtr = std::shared_ptr<MultimediaObject>;
 
-class Group : public std::list<MultimediaObject *> {
+class Group : public std::list<ObjectPtr> {
 private:
     std::string name;
 

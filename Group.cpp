@@ -7,7 +7,7 @@ std::string Group::getName() const {
 }
 
 void Group::print(std::ostream& out) const {
-    for (MultimediaObject * object : *this) {
+    for (ObjectPtr object : *this) {
         object->print(out);
     }
 }

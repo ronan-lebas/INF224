@@ -5,7 +5,9 @@ MultimediaObject::MultimediaObject(std::string name, std::string filename) : nam
 MultimediaObject::MultimediaObject() : name(""), filename("") {}
 
 // Destructor
-MultimediaObject::~MultimediaObject() {}
+MultimediaObject::~MultimediaObject() {
+    std::cout << "MultimediaObject " << name << " destroyed" << std::endl;
+}
 
 // Getter for name
 std::string MultimediaObject::getName() const {
