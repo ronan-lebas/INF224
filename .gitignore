@@ -2,3 +2,7 @@
 *.o
 myprog
 depend-myprog
+client
+server
+depend-client
+depend-server
