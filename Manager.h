@@ -22,7 +22,8 @@ class Manager {
         ObjectPtr createVideo(const std::string name, const std::string filename, const int duration);
         ObjectPtr createMovie(const std::string name, const std::string filename, const int duration, const int chaptersNumber, const int * chapters);
         GroupPtr createGroup(const std::string name);
-        void print(std::ostream & out, const std::string name) const;
+        void printObject(std::ostream & out, const std::string name) const;
+        void printGroup(std::ostream & out, const std::string name) const;
         void play(const std::string name) const;
         void remove(const std::string name);
 

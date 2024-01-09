@@ -9,53 +9,32 @@
 #include "Video.h"
 #include "Movie.h"
 #include "Group.h"
+#include "Manager.h"
 using namespace std;
 
 int main(int argc, const char* argv[])
 {
-    std::cout << "Hello brave new world" << std::endl;
-    
+    std::cout << "-----Test du manager-----" << std::endl;
+    Manager * manager = new Manager();
 
-    int number = 5;
-    MultimediaObject ** objects = new MultimediaObject*[number];
+    ObjectPtr image =  manager->createImage("Image", "image.jpg", 100, 200);
+    ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
+    ObjectPtr image2 = manager->createImage("Image2", "image2.jpg", 100, 200);
+    ObjectPtr video2 = manager->createVideo("Video2", "video2.mp4", 60);
+    GroupPtr group = manager->createGroup("Groupe de test");
+    group->push_back(image);
+    group->push_back(video);
 
-    objects[0] = new Image("Image", "image.jpg", 100, 200);
-    objects[1] = new Video("Video", "video.mp4", 60);
-    objects[2] = new Image("Image2", "image2.jpg", 100, 200);
-    objects[3] = new Video("Video2", "video2.mp4", 60);
-    objects[4] = new Image("Image3", "image3.jpg", 100, 200);
-
-    for(int i=0; i<number; i++){
-        objects[i]->print(std::cout);
-    }
-
-    std::cout << "Film :" << std::endl;
-
-    int chapters[3] = {10, 20, 30};
-    Movie * movie = new Movie("Movie", "movie.mp4", 120, 3, chapters);
-    movie->print(std::cout);
-    movie->printChapter(std::cout);
-
-    Movie * movie2 = new Movie(*movie);
-    movie2->print(std::cout);
-
-    std::cout << "-----Test des groupes-----" << std::endl;
-
-    Group * group = new Group("Groupe de test");
-
-    group->push_back((ObjectPtr) objects[0]);
-    group->push_back((ObjectPtr) objects[1]);
-    group->push_back((ObjectPtr) objects[2]);
-
+    manager->printObject(std::cout, "Image");
+    manager->printObject(std::cout, "Video");
+    manager->printObject(std::cout, "Image2");
+    manager->printObject(std::cout, "Video2");
+    manager->printGroup(std::cout, "Groupe de test");
+    manager->play("Image");
+    manager->play("Video");
+    manager->remove("Image");
+    manager->remove("Video");
     group->print(std::cout);
-
-    Group * group2 = new Group(*group);
-    group2->push_back((ObjectPtr) objects[3]);
-    group2->push_back((ObjectPtr) objects[4]);
-    group2->print(std::cout);
-
-    delete group2;
-    delete group;
 
     return 0;
 }

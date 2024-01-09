@@ -24,12 +24,21 @@ GroupPtr Manager::createGroup(const std::string name) {
     return group;
 }
 /////////////////
-void Manager::print(std::ostream & out, const std::string name) const {
+void Manager::printObject(std::ostream & out, const std::string name) const {
     auto it = objects.find(name);
     if (it != objects.end()) {
         it->second->print(out);
     } else {
         out << "Object not found." << std::endl;
+    }
+}
+
+void Manager::printGroup(std::ostream & out, const std::string name) const {
+    auto it = groups.find(name);
+    if (it != groups.end()) {
+        it->second->print(out);
+    } else {
+        out << "Group not found." << std::endl;
     }
 }
 
@@ -43,8 +52,12 @@ void Manager::play(const std::string name) const {
 }
 
 void Manager::remove(const std::string name) {
-    auto it = objects.find(name);
-    if (it != objects.end()) {
-        objects.erase(it);
+    for (auto it = objects.begin(); it != objects.end(); it++) {
+        if (it->first == name) {
+            for (auto it2 = groups.begin(); it2 != groups.end(); it2++) {
+                it2->second->remove(it->second);
+            }
+            break;
+        }
     }
 }

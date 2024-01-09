@@ -30,13 +30,17 @@ const int * Movie::getChapters() const {
 
 }
 
-void Movie::setChapters(int newNumberOfChapters, const int newChapters[])
+void Movie::setChapters(int newNumberOfChapters, const int * newChapters)
 {
-    numberOfChapters = newNumberOfChapters;
-    chapters = new int[numberOfChapters];
-    for (int i = 0; i < numberOfChapters; i++)
-    {
-        chapters[i] = newChapters[i];
+    if ((newNumberOfChapters <= 0) | (newChapters == nullptr)) return;
+    else {
+        delete[] chapters;
+        numberOfChapters = newNumberOfChapters;
+        chapters = new int[numberOfChapters];
+        for (int i = 0; i < numberOfChapters; i++)
+        {
+            chapters[i] = newChapters[i];
+        }
     }
 }
 
