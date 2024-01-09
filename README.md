@@ -1,2 +1,2 @@
 # INF224
-Ce dépôt contient le TP du cours INF224 de l'année 2023-2024 de Télécom Paris.
+This repository contains the lab work of the course INF224 of the year 2023-2024 of Télécom Paris.
