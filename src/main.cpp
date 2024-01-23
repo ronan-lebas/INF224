@@ -4,14 +4,17 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "MultimediaObject.h"
 #include "Image.h"
 #include "Video.h"
 #include "Movie.h"
 #include "Group.h"
 #include "Manager.h"
+#include "tcpserver.h"
 using namespace std;
 
+#ifdef VERSION_TEST
 int main(int argc, const char* argv[])
 {
     std::cout << "-----Test du manager-----" << std::endl;
@@ -38,3 +41,63 @@ int main(int argc, const char* argv[])
 
     return 0;
 }
+#endif
+
+#define VERSION_SERVER
+#ifdef VERSION_SERVER
+
+const int PORT = 3331;
+
+Manager * manager = new Manager();
+ObjectPtr image = manager->createImage("Image", "image.jpg", 100, 200);
+ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
+GroupPtr group = manager->createGroup("Groupe de test");
+
+
+int main(int argc, const char * argv[]){
+    
+    // cree le TCPServer
+    auto* server = new TCPServer( [&](std::string const& request, std::string& response) {
+
+        // the request sent by the client to the server
+        std::cout << "request: " << request << std::endl;
+
+        std::string requestType = request.substr(0,request.find("-"));
+        std::string name = request.substr(request.find("-")+1);
+        std::stringstream ss;
+
+        if (requestType == "searchobject"){
+            manager->printObject(ss, name);
+            std::cout << requestType << std::endl;
+            std::cout << name << std::endl;
+            std::cout << ss.str() << std::endl;
+        }
+        else if (requestType == "searchgroup"){
+            manager->printGroup(ss, name);
+        }
+        else if (requestType == "play"){
+            manager->play(request.substr(5));
+        }
+        response = ss.str();
+        // the response that the server sends back to the client
+        //response = "RECEIVED: " + request;
+
+        // return false would close the connecytion with the client
+        return true;
+    });
+
+
+    // lance la boucle infinie du serveur
+    std::cout << "Starting Server on port " << PORT << std::endl;
+
+    int status = server->run(PORT);
+
+    // en cas d'erreur
+    if (status < 0) {
+    std::cerr << "Could not start Server on port " << PORT << std::endl;
+    return 1;
+    }
+    
+    return 0;
+}
+#endif

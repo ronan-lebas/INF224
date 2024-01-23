@@ -23,7 +23,7 @@ GroupPtr Manager::createGroup(const std::string name) {
     groups[name] = group;
     return group;
 }
-/////////////////
+
 void Manager::printObject(std::ostream & out, const std::string name) const {
     auto it = objects.find(name);
     if (it != objects.end()) {

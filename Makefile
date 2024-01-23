@@ -14,7 +14,7 @@ PROG = myprog
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
-SOURCES = src/MultimediaObject.cpp src/main.cpp src/Video.cpp src/Image.cpp src/Movie.cpp src/Group.cpp src/Manager.cpp
+SOURCES = src/MultimediaObject.cpp src/main.cpp src/Video.cpp src/Image.cpp src/Movie.cpp src/Group.cpp src/Manager.cpp src/tcpserver.cpp src/ccsocket.cpp
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
@@ -43,7 +43,7 @@ LDFLAGS =
 # Librairies a utiliser
 # Exemple: LDLIBS = -L/usr/local/qt/lib -lqt
 #
-LDLIBS = 
+LDLIBS = -lpthread
 
 
 ##########################################
@@ -61,7 +61,7 @@ ${PROG}: depend-${PROG} ${OBJETS}
 	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${OBJETS} ${LDLIBS}
 
 clean:
-	-@$(RM) *.o depend-${PROG} core 1>/dev/null 2>&1
+	-@$(RM) src/*.o tcpserver/*.o depend-${PROG} depend-myprog tcpserver/client tcpserver/server tcpserver/depend-client tcpserver/depend-server core 1>/dev/null 2>&1
 
 clean-all: clean
 	-@$(RM) ${PROG} 1>/dev/null 2>&1
