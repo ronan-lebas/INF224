@@ -31,6 +31,6 @@ void MultimediaObject::setFilename(const std::string& newFilename) {
 
 // Print method
 void MultimediaObject::print(std::ostream& out) const {
-    out << "Name: " << name << std::endl;
-    out << "Filename: " << filename << std::endl;
+    out << "Name: " << name << ", ";
+    out << "Filename: " << filename;
 }

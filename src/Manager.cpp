@@ -29,7 +29,7 @@ void Manager::printObject(std::ostream & out, const std::string name) const {
     if (it != objects.end()) {
         it->second->print(out);
     } else {
-        out << "Object not found." << std::endl;
+        out << "Object not found.";
     }
 }
 
@@ -38,7 +38,7 @@ void Manager::printGroup(std::ostream & out, const std::string name) const {
     if (it != groups.end()) {
         it->second->print(out);
     } else {
-        out << "Group not found." << std::endl;
+        out << "Group not found.";
     }
 }
 
@@ -47,7 +47,7 @@ void Manager::play(const std::string name) const {
     if (it != objects.end()) {
         it->second->play();
     } else {
-        std::cout << "Object not found." << std::endl;
+        std::cout << "Object not found.";
     }
 }
 

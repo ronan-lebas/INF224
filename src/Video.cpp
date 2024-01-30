@@ -13,9 +13,9 @@ void Video::setDuration(int newDuration) {
 }
 
 void Video::print(std::ostream& out) const {
-    out << "Name: " << name << std::endl;
-    out << "Filename: " << filename << std::endl;
-    out << "Duration: " << duration << " seconds" << std::endl;
+    out << "Name: " << name << ", ";
+    out << "Filename: " << filename << ", ";
+    out << "Duration: " << duration << " seconds";
 }
 
 void Video::play() const {

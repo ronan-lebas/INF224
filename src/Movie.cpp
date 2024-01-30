@@ -48,6 +48,6 @@ void Movie::printChapter(std::ostream &out) const
 {
     for (int i = 0; i < numberOfChapters; i++)
     {
-        out << "Chapitre " << i << " : " << chapters[i] << std::endl;
+        out << "Chapitre " << i << " : " << chapters[i] << ", ";
     }
 }
