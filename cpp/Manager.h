@@ -32,6 +32,7 @@ class Manager {
         bool saveObjects(std::string filename) const;
         bool readObjects(std::string filename);
         ObjectPtr createObject(std::string classname) const;
+        bool checkNames(std::string name) const;
 
 };
 

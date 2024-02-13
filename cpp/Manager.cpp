@@ -1,24 +1,34 @@
 #include "Manager.h"
 
+bool Manager::checkNames(std::string name) const {
+    if ((objects.find(name) == objects.end()) && (groups.find(name) == groups.end())) return true;
+    return false;
+}
+
 ObjectPtr Manager::createImage(const std::string name, const std::string filename, const int width, const int height) {
+    if (!checkNames(name)) throw std::runtime_error("Name already exists.");
     ObjectPtr image(new Image(name, filename, width, height));
     objects[name] = image;
     return image;
 }
 
 ObjectPtr Manager::createVideo(const std::string name, const std::string filename, const int duration) {
+    if (!checkNames(name)) throw std::runtime_error("Name already exists.");
     ObjectPtr video(new Video(name, filename, duration));
     objects[name] = video;
     return video;
 }
 
-ObjectPtr Manager::createMovie(const std::string name, const std::string filename, const int duration, const int chaptersNumber, const int * chapters) {
+ObjectPtr Manager::createMovie(const std::string name, const std::string filename, const int duration, const int chaptersNumber, const int chapters[]) {
+    if (!checkNames(name)) throw std::runtime_error("Name already exists.");
+    if (chaptersNumber <= 0) throw std::runtime_error("Invalid number of chapters.");
     ObjectPtr movie(new Movie(name, filename, duration, chaptersNumber, chapters));
     objects[name] = movie;
     return movie;
 }
 
 GroupPtr Manager::createGroup(const std::string name) {
+    if (!checkNames(name)) throw std::runtime_error("Name already exists.");
     GroupPtr group(new Group(name));
     groups[name] = group;
     return group;
