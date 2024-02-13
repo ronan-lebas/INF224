@@ -64,21 +64,38 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // Création de la zone de texte avec JScrollPane
-        textArea = new JTextArea(10, 30);
+        textArea = new JTextArea(20, 80);
         JScrollPane scrollPane = new JScrollPane(textArea);
         
         // Création des actions
-        Action actionButton1 = new AbstractAction("Bouton 1") {
+        Action actionButton1 = new AbstractAction("Chercher") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textArea.append("Texte du Bouton 1\n");
+              int choice = JOptionPane.showConfirmDialog(null, "Chercher un groupe ?", "Ressource ou Groupe", JOptionPane.YES_NO_OPTION);
+              String name = JOptionPane.showInputDialog("Nom du groupe ou de la ressource");
+              String request = ((choice == JOptionPane.YES_OPTION) ? "searchgroup" : "searchobject") + "-" + name;
+              if (choice == JOptionPane.YES_OPTION) {
+                textArea.append("Recherche du groupe "+name+"...\n");
+              } else {
+                textArea.append("Recherche de la Ressource "+name+"...\n");
+              }
+              String result = send(request);
+              if (result != null) {
+                textArea.append("Résultat de la recherche : "+ result +"\n");
+              }
+              else {
+                textArea.append("Erreur\n");
+              }
             }
         };
 
-        Action actionButton2 = new AbstractAction("Bouton 2") {
+        Action actionButton2 = new AbstractAction("Jouer") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textArea.append("Texte du Bouton 2\n");
+              String name = JOptionPane.showInputDialog("Nom de la ressource");
+              String request = "play-" + name;
+              send(request);
+              textArea.append("Lecture de la ressource "+name+"...\n");
             }
         };
 
@@ -131,21 +148,5 @@ public class MainFrame extends JFrame {
         }
         
         System.out.println("Client connected to "+host+":"+port);
-    
-        // pour lire depuis la console
-        BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
-        
-        while (true) {
-          System.out.print("Request: ");
-          try {
-            String request = cin.readLine();
-            String response = client.send(request);
-            System.out.println("Response: " + response);
-          }
-          catch (java.io.IOException e) {
-            System.err.println("Client: IO error");
-            return;
-          }
-        }
       }
 }

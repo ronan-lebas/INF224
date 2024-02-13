@@ -47,16 +47,16 @@ int main(int argc, const char* argv[])
 #define VERSION_SERVER
 #ifdef VERSION_SERVER
 
-const int PORT = 3331;
-
-Manager * manager = new Manager();
-ObjectPtr image = manager->createImage("Image", "image.jpg", 100, 200);
-ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
-GroupPtr group = manager->createGroup("Groupe de test");
-
-
 int main(int argc, const char * argv[]){
     
+    const int PORT = 3331;
+    Manager * manager = new Manager();
+    ObjectPtr image = manager->createImage("Image", "image.jpg", 100, 200);
+    ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
+    GroupPtr group = manager->createGroup("Groupe de test");
+    group->push_back(image);
+    group->push_back(video);
+
     // cree le TCPServer
     auto* server = new TCPServer( [&](std::string const& request, std::string& response) {
 
@@ -69,16 +69,16 @@ int main(int argc, const char * argv[]){
 
         if (requestType == "searchobject"){
             manager->printObject(ss, name);
-            std::cout << requestType << std::endl;
-            std::cout << name << std::endl;
-            std::cout << ss.str() << std::endl;
         }
         else if (requestType == "searchgroup"){
             manager->printGroup(ss, name);
         }
         else if (requestType == "play"){
-            manager->play(request.substr(5));
+            manager->play(name);
         }
+        std::cout << requestType << std::endl;
+        std::cout << name << std::endl;
+        std::cout << ss.str() << std::endl;
         response = ss.str();
         // the response that the server sends back to the client
         //response = "RECEIVED: " + request;

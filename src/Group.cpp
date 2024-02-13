@@ -7,8 +7,9 @@ std::string Group::getName() const {
 }
 
 void Group::print(std::ostream& out) const {
-    out << "Group " << name << " contains:" << ", ";
+    out << name << " contains: ";
     for (ObjectPtr object : *this) {
         object->print(out);
+        out << ", ";
     }
 }
