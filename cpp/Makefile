@@ -14,7 +14,7 @@ PROG = myprog
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
-SOURCES = cpp/MultimediaObject.cpp cpp/main.cpp cpp/Video.cpp cpp/Image.cpp cpp/Movie.cpp cpp/Group.cpp cpp/Manager.cpp cpp/tcpserver.cpp cpp/ccsocket.cpp
+SOURCES = MultimediaObject.cpp main.cpp Video.cpp Image.cpp Movie.cpp Group.cpp Manager.cpp tcpserver.cpp ccsocket.cpp
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
@@ -61,7 +61,7 @@ ${PROG}: depend-${PROG} ${OBJETS}
 	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${OBJETS} ${LDLIBS}
 
 clean:
-	-@$(RM) cpp/*.o tcpserver/*.o depend-${PROG} depend-myprog tcpserver/client tcpserver/server tcpserver/depend-client tcpserver/depend-server core 1>/dev/null 2>&1
+	-@$(RM) *.o tcpserver/*.o depend-${PROG} depend-myprog tcpserver/client tcpserver/server tcpserver/depend-client tcpserver/depend-server core 1>/dev/null 2>&1
 
 clean-all: clean
 	-@$(RM) ${PROG} 1>/dev/null 2>&1
