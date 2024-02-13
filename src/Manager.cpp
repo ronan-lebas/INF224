@@ -33,6 +33,14 @@ void Manager::printObject(std::ostream & out, const std::string name) const {
     }
 }
 
+void Manager::printAllObjects(std::ostream & out) const {
+    for (auto it = objects.begin(); it != objects.end(); it++) {
+        out << "Object:" << std::endl;
+        it->second->print(out);
+        out << std::endl;
+    }
+}
+
 void Manager::printGroup(std::ostream & out, const std::string name) const {
     auto it = groups.find(name);
     if (it != groups.end()) {
@@ -59,5 +67,65 @@ void Manager::remove(const std::string name) {
             }
             break;
         }
+    }
+}
+
+bool Manager::saveObjects(std::string filename) const {
+    
+    std::ofstream f(filename);
+
+    if(!f) {
+        std::cerr << "Error opening file " << filename << std::endl;
+        return false;
+    }
+    
+    for (auto it = objects.begin(); it != objects.end(); it++) {
+        it->second->serialize(f);
+        if(f.fail()) {
+            std::cerr << "Error writing to file " << filename << std::endl;
+            return false;
+        }
+    }
+    f.close();
+    return true;
+}
+
+bool Manager::readObjects(std::string filename) {
+
+    objects.clear();
+    std::ifstream f(filename);
+
+    if(!f) {
+        std::cerr << "Error opening file " << filename << std::endl;
+        return false;
+    }
+
+    while(f){
+        std::string classname;
+        getline(f, classname);
+        if (classname == "") break;
+        ObjectPtr object = createObject(classname);
+        object->deserialize(f);
+        if(f.fail()) {
+            std::cerr << "Error reading from file " << filename << std::endl;
+            object.reset();
+            return false;
+        }
+        objects[object->getName()] = object;
+    }
+    f.close();
+    return true;
+}
+
+ObjectPtr Manager::createObject(std::string classname) const {
+    if (classname == "Image") {
+        return ObjectPtr(new Image());
+    } else if (classname == "Video") {
+        return ObjectPtr(new Video());
+    } else if (classname == "Movie") {
+        return ObjectPtr(new Movie());
+    } else {
+        std::cout << "Class not found." << std::endl;
+        return nullptr;
     }
 }

@@ -1,5 +1,6 @@
 #include "Video.h"
 
+Video::Video() : MultimediaObject() {}
 Video::Video(std::string name, std::string filename, int duration) : MultimediaObject(name, filename), duration(duration) {}
 
 Video::~Video() {}
@@ -21,4 +22,19 @@ void Video::print(std::ostream& out) const {
 void Video::play() const {
     std::string command = "mpv " + filename + " &";
     system(command.c_str());
+}
+
+std::string Video::classname() const {
+    return "Video";
+}
+
+void Video::serialize(std::ostream & out) const {
+    MultimediaObject::serialize(out);
+    out << duration << "\n";
+}
+
+void Video::deserialize(std::istream & in) {
+    MultimediaObject::deserialize(in);
+    in >> duration;
+    in.ignore();
 }

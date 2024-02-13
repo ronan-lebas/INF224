@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <iostream>
+#include <fstream>
 #include "MultimediaObject.h"
 #include "Group.h"
 #include "Image.h"
@@ -23,9 +25,13 @@ class Manager {
         ObjectPtr createMovie(const std::string name, const std::string filename, const int duration, const int chaptersNumber, const int * chapters);
         GroupPtr createGroup(const std::string name);
         void printObject(std::ostream & out, const std::string name) const;
+        void printAllObjects(std::ostream & out) const;
         void printGroup(std::ostream & out, const std::string name) const;
         void play(const std::string name) const;
         void remove(const std::string name);
+        bool saveObjects(std::string filename) const;
+        bool readObjects(std::string filename);
+        ObjectPtr createObject(std::string classname) const;
 
 };
 

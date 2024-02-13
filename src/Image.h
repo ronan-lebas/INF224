@@ -8,6 +8,7 @@ class Image : public MultimediaObject {
         int width {};
         int height {};
     public:
+        Image();
         Image(std::string name, std::string filename, int width, int height);
         ~Image();
         int getWidth() const;
@@ -19,6 +20,12 @@ class Image : public MultimediaObject {
         void setHeight(int newHeight);
 
         void play() const;
+
+        std::string classname() const override;
+
+        void serialize(std::ostream & out) const override;
+
+        void deserialize(std::istream & in) override;
         
 };
 #endif

@@ -6,6 +6,7 @@
 
 class Movie : public Video {
 public:
+    Movie();
     Movie(std::string name, std::string filename, int duration);
     Movie(std::string name, std::string filename, int duration, int numberOfChapters, const int * chapters);
     Movie(const Movie& movie);
@@ -15,6 +16,9 @@ public:
     const int * getChapters() const;
     void setChapters(int newNumberOfChapters, const int newChapters[]);
     void printChapter(std::ostream& out) const;
+    std::string classname() const override;
+    void serialize(std::ostream & out) const override;
+    void deserialize(std::istream & in) override;
 
 private:
     int numberOfChapters = 0;

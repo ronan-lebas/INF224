@@ -2,7 +2,7 @@
 
 // Constructor
 MultimediaObject::MultimediaObject(std::string name, std::string filename) : name(name), filename(filename) {}
-MultimediaObject::MultimediaObject() : name(""), filename("") {}
+MultimediaObject::MultimediaObject() {}
 
 // Destructor
 MultimediaObject::~MultimediaObject() {
@@ -33,4 +33,15 @@ void MultimediaObject::setFilename(const std::string& newFilename) {
 void MultimediaObject::print(std::ostream& out) const {
     out << "Name: " << name << ", ";
     out << "Filename: " << filename;
+}
+
+// Serialize method
+void MultimediaObject::serialize(std::ostream & out) const {
+    out << classname() << "\n" << name << "\n" << filename << "\n";
+}
+
+// Deserialize method
+void MultimediaObject::deserialize(std::istream & in) {
+    std::getline(in, name);
+    std::getline(in, filename);
 }

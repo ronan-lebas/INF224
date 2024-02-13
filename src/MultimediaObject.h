@@ -20,9 +20,15 @@ public:
 
     virtual void play() const = 0; // Play method
 
+    virtual void serialize(std::ostream & out) const; // Serialize method
+
+    virtual void deserialize(std::istream & in); // Deserialize method
+
+    virtual std::string classname() const = 0;
+
 protected:
-    std::string name;
-    std::string filename;
+    std::string name {};
+    std::string filename {};
 };
 
 #endif
