@@ -14,54 +14,51 @@ public class MainFrame extends JFrame {
         textArea = new JTextArea(10, 30);
         JScrollPane scrollPane = new JScrollPane(textArea);
         
-        // Création des boutons
-        JButton button1 = new JButton("Bouton 1");
-        JButton button2 = new JButton("Bouton 2");
-        JButton exitButton = new JButton("Quitter");
-        
-        // Ajout des écouteurs d'événements aux boutons
-        button1.addActionListener(new ActionListener() {
+        // Création des actions
+        Action actionButton1 = new AbstractAction("Bouton 1") {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.append("Texte du Bouton 1\n");
             }
-        });
-        button2.addActionListener(new ActionListener() {
+        };
+
+        Action actionButton2 = new AbstractAction("Bouton 2") {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.append("Texte du Bouton 2\n");
             }
-        
-        });
-        exitButton.addActionListener(new ActionListener() {
+        };
+
+        Action actionExit = new AbstractAction("Quitter") {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
-        });
+        };
         
-        // Création du panneau pour les boutons
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(button1);
-        buttonPanel.add(button2);
-        buttonPanel.add(exitButton);
+        // Toolbar
+        JToolBar toolBar = new JToolBar();
+        toolBar.add(new JButton(actionButton1));
+        toolBar.add(new JButton(actionButton2));
+        toolBar.add(new JButton(actionExit));
+        toolBar.setFloatable(false);
+        
+        // Menu
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Fichier");
+        setJMenuBar(menuBar);
+        menuBar.add(menu);
+        menu.add(new JMenuItem(actionButton1));
+        menu.add(new JMenuItem(actionButton2));
+        menu.add(new JMenuItem(actionExit));
         
         // Ajout des composants à la fenêtre
         add(scrollPane, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(toolBar, BorderLayout.NORTH);
         
         // Pack et rend visible la fenêtre
         pack();
         setVisible(true);
-    }
-    
-    public void actionPerformed(ActionEvent e) {
-        // Récupérer la source de l'événement
-        JButton button = (JButton)e.getSource();
-        
-        // Ajouter du texte à la zone de texte en fonction du bouton
-        if (button.getText().equals("Bouton 1")) {
-            textArea.append("Texte du Bouton 1\n");
-        } else if (button.getText().equals("Bouton 2")) {
-            textArea.append("Texte du Bouton 2\n");
-        }
     }
     
     public static void main(String[] args) {
