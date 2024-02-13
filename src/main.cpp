@@ -44,7 +44,7 @@ int main(int argc, const char* argv[])
 }
 #endif
 
-//#define VERSION_SERVER
+#define VERSION_SERVER
 #ifdef VERSION_SERVER
 
 const int PORT = 3331;
@@ -103,7 +103,7 @@ int main(int argc, const char * argv[]){
 }
 #endif
 
-#define VERSION_SERIAL
+//#define VERSION_SERIAL
 #ifdef VERSION_SERIAL
 
 int main() {
