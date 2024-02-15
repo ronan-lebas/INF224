@@ -51,7 +51,7 @@ Here are the answers to the questions of the lab:
     * Quand la fenêtre devient trop petite, le texte est masqué, il faut ajouter des ascenseurs pour résoudre ce problème
 
 ## Documentation
-Doxygen-generated documentation is available by opening `docs/html/index.html` in a web browser.
+Doxygen-generated documentation is available by opening [this file](docs/html/index.html) in a web browser.
 
 ## Explanations
 I chose to use exceptions for C++ step 13, but I think the way inputs are processed remove the need for a lot of exceptions: for instance, if the user wants to search an object which doesn't exist, the server will simply respond with a message indicating the object cannot be found, so using exceptions in such cases is not worth. I implemented exceptions for a few cases that seem necessary to me.
