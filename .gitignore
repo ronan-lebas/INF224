@@ -7,3 +7,4 @@ server
 depend-client
 depend-server
 test.txt
+generate_zip.sh
