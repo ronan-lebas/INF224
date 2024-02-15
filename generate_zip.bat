@@ -6,6 +6,7 @@ mkdir Lebas__Ronan
 REM Copy the directories into it
 xcopy /E /I cpp Lebas__Ronan\cpp
 xcopy /E /I swing Lebas__Ronan\swing
+xcopy /E /I docs Lebas__Ronan\docs
 
 REM Convert the README to PDF
 pandoc README.md -s -o README.pdf

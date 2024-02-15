@@ -4,6 +4,11 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Represents the main frame of the application.
+ * This frame is responsible for establishing a connection with the server,
+ * creating the graphical user interface, and handling user interactions.
+ */
 public class MainFrame extends JFrame {
     private static final long serialVersionUID = 1L;
     static final String DEFAULT_HOST = "localhost";
