@@ -20,6 +20,8 @@ class Manager {
         std::map<std::string, GroupPtr> groups;
 
     public:
+        Manager();
+        ~Manager();
         ObjectPtr createImage(const std::string name, const std::string filename, const int width, const int height);
         ObjectPtr createVideo(const std::string name, const std::string filename, const int duration);
         ObjectPtr createMovie(const std::string name, const std::string filename, const int duration, const int chaptersNumber, const int * chapters);

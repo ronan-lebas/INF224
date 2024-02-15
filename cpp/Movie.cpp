@@ -31,9 +31,9 @@ const int * Movie::getChapters() const {
 
 }
 
-void Movie::setChapters(int newNumberOfChapters, const int * newChapters)
+void Movie::setChapters(int newNumberOfChapters, const int newChapters[])
 {
-    if ((newNumberOfChapters <= 0) | (newChapters == nullptr)) return;
+    if ((newNumberOfChapters <= 0) | (newChapters == nullptr)) throw std::runtime_error("Invalid chapters.");
     else {
         delete[] chapters;
         numberOfChapters = newNumberOfChapters;

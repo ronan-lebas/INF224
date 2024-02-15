@@ -14,37 +14,48 @@
 #include "tcpserver.h"
 using namespace std;
 
-//#define VERSION_TEST
+#define VERSION_TEST
 #ifdef VERSION_TEST
 int main(int argc, const char* argv[])
 {
     std::cout << "-----Test du manager-----" << std::endl;
-    Manager * manager = new Manager();
+    Manager* manager = new Manager();
 
+    int array[3] = {20, 40, 60};
     ObjectPtr image =  manager->createImage("Image", "image.jpg", 100, 200);
     ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
     ObjectPtr image2 = manager->createImage("Image2", "image2.jpg", 100, 200);
     ObjectPtr video2 = manager->createVideo("Video2", "video2.mp4", 60);
+    ObjectPtr movie = manager->createMovie("Movie", "movie.mp4", 120, 3, array);
     GroupPtr group = manager->createGroup("Groupe de test");
     group->push_back(image);
     group->push_back(video);
+    group->push_back(image2);
+    group->push_back(video2);
+    group->push_back(movie);
 
     manager->printObject(std::cout, "Image");
     manager->printObject(std::cout, "Video");
     manager->printObject(std::cout, "Image2");
     manager->printObject(std::cout, "Video2");
+    std::cout << std::endl;
     manager->printGroup(std::cout, "Groupe de test");
-    manager->play("Image");
-    manager->play("Video");
+    //manager->play("Image");
+    //manager->play("Video");
+    std::cout << std::endl;
     manager->remove("Image");
     manager->remove("Video");
+    manager->remove("Movie");
+    std::cout << std::endl;
     group->print(std::cout);
+
+    delete manager;
 
     return 0;
 }
 #endif
 
-#define VERSION_SERVER
+//#define VERSION_SERVER
 #ifdef VERSION_SERVER
 
 int main(int argc, const char * argv[]){
@@ -102,7 +113,8 @@ int main(int argc, const char * argv[]){
     std::cerr << "Could not start Server on port " << PORT << std::endl;
     return 1;
     }
-    
+    delete server;
+    delete manager;
     return 0;
 }
 #endif
@@ -131,6 +143,9 @@ int main() {
     Manager * manager2 = new Manager();
     manager2->readObjects(filename);
     manager2->printAllObjects(std::cout);
+
+    delete manager;
+    delete manager2;
 
     return 0;
 }
