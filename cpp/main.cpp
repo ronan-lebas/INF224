@@ -14,30 +14,38 @@
 #include "tcpserver.h"
 using namespace std;
 
-#define VERSION_TEST
-#ifdef VERSION_TEST
-int main(int argc, const char* argv[])
+int test()
 {
+    std::cout << std::endl << std::endl;
     std::cout << "-----Test du manager-----" << std::endl;
     Manager* manager = new Manager();
 
     int array[3] = {20, 40, 60};
-    ObjectPtr image =  manager->createImage("Image", "image.jpg", 100, 200);
-    ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
-    ObjectPtr image2 = manager->createImage("Image2", "image2.jpg", 100, 200);
-    ObjectPtr video2 = manager->createVideo("Video2", "video2.mp4", 60);
-    ObjectPtr movie = manager->createMovie("Movie", "movie.mp4", 120, 3, array);
-    GroupPtr group = manager->createGroup("Groupe de test");
-    group->push_back(image);
-    group->push_back(video);
-    group->push_back(image2);
-    group->push_back(video2);
-    group->push_back(movie);
-
+    GroupPtr group;
+    try{
+        ObjectPtr image =  manager->createImage("Image", "image.jpg", 100, 200);
+        ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
+        ObjectPtr image2 = manager->createImage("Image2", "image2.jpg", 100, 200);
+        ObjectPtr video2 = manager->createVideo("Video2", "video2.mp4", 60);
+        ObjectPtr movie = manager->createMovie("Movie", "movie.mp4", 120, 3, array);
+        group = manager->createGroup("Groupe de test");
+        group->push_back(image);
+        group->push_back(video);
+        group->push_back(image2);
+        group->push_back(video2);
+        group->push_back(movie);
+    } catch(std::exception & e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
     manager->printObject(std::cout, "Image");
+    std::cout << std::endl;
     manager->printObject(std::cout, "Video");
+    std::cout << std::endl;
     manager->printObject(std::cout, "Image2");
+    std::cout << std::endl;
     manager->printObject(std::cout, "Video2");
+    std::cout << std::endl;
+    manager->printObject(std::cout, "Movie");
     std::cout << std::endl;
     manager->printGroup(std::cout, "Groupe de test");
     //manager->play("Image");
@@ -48,18 +56,18 @@ int main(int argc, const char* argv[])
     manager->remove("Movie");
     std::cout << std::endl;
     group->print(std::cout);
+    std::cout << std::endl;
 
     delete manager;
 
     return 0;
 }
-#endif
 
-//#define VERSION_SERVER
-#ifdef VERSION_SERVER
-
-int main(int argc, const char * argv[]){
+int server(){
     
+    std::cout << std::endl << std::endl;
+    std::cout << "-----Test du serveur-----" << std::endl;
+
     const int PORT = 3331;
     Manager * manager = new Manager();
     try {
@@ -117,21 +125,22 @@ int main(int argc, const char * argv[]){
     delete manager;
     return 0;
 }
-#endif
 
-//#define VERSION_SERIAL
-#ifdef VERSION_SERIAL
-
-int main() {
+int serial() {
     
+    std::cout << std::endl << std::endl;
     std::cout << "-----Test de la sérialisation-----" << std::endl;
     Manager * manager = new Manager();
-    ObjectPtr image =  manager->createImage("Image", "image.jpg", 100, 200);
-    ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
-    ObjectPtr image2 = manager->createImage("Image2", "image2.jpg", 100, 200);
-    ObjectPtr video2 = manager->createVideo("Video2", "video2.mp4", 60);
-    ObjectPtr movie = manager->createMovie("Movie", "movie.mp4", 120, 3, new int[3]{20, 40, 60});
-
+    int array[3] = {20, 40, 60};
+    try {
+        ObjectPtr image =  manager->createImage("Image", "image.jpg", 100, 200);
+        ObjectPtr video = manager->createVideo("Video", "video.mp4", 60);
+        ObjectPtr image2 = manager->createImage("Image2", "image2.jpg", 100, 200);
+        ObjectPtr video2 = manager->createVideo("Video2", "video2.mp4", 60);
+        ObjectPtr movie = manager->createMovie("Movie", "movie.mp4", 120, 3, array);
+    } catch(std::exception & e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
     manager->printAllObjects(std::cout);
 
 
@@ -150,4 +159,12 @@ int main() {
     return 0;
 }
 
-#endif
+int main(int argc, const char ** argv) {
+    std::cout << std::endl << std::endl;
+    std::cout << "Les trois fonctions principales vont êtres testées, d'abord la gestion des objets/mémoire, puis la sérialisation, puis le serveur sera lancé" << std::endl;
+    test();
+    serial();
+    server();
+    
+    return 0;
+}
