@@ -8,8 +8,11 @@ All mandatory questions have been answered.
 * Each of these folders have a Makefile to compile and execute with `make run`
 
 In `cpp/main.cpp`, there are three functions that can be called by the `main` function:
+
 * `test` for testing the management of objects and memory
+
 * `serial` for testing the serialization
+
 * `server` for testing the interaction with the Java client
 
 By default the program will execute these three functions, but one can look for memory leaks using `valgrind` by commenting the call to `server` in `main` (because the server is an infinite loop, so `valgrind` cannot be used).
