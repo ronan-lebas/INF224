@@ -8,9 +8,9 @@ All mandatory questions have been answered.
 * Each of these folders have a Makefile to compile and execute with `make run`
 
 In `cpp/main.cpp`, there are three functions that can be called by the `main` function:
-1. `test` for testing the management of objects and memory
-2. `serial` for testing the serialization
-3. `server` for testing the interaction with the Java client
+* `test` for testing the management of objects and memory
+* `serial` for testing the serialization
+* `server` for testing the interaction with the Java client
 
 By default the program will execute these three functions, but one can look for memory leaks using `valgrind` by commenting the call to `server` in `main` (because the server is an infinite loop, so `valgrind` cannot be used).
 
@@ -48,7 +48,7 @@ Here are the answers to the questions of the lab:
     * Quand la fenêtre devient trop petite, le texte est masqué, il faut ajouter des ascenseurs pour résoudre ce problème
 
 ## Documentation
-Doxygen-generated documentation is available by opening [this file](docs/html/index.html) in a web browser.
+Doxygen-generated documentation is available by opening `docs/html/index.html` in a web browser.
 
 ## Explanations
 I chose to use exceptions for C++ step 13, but I think the way inputs are processed remove the need for a lot of exceptions: for instance, if the user wants to search an object which doesn't exist, the server will simply respond with a message indicating the object cannot be found, so using exceptions in such cases is not worth. I implemented exceptions for a few cases that seem necessary to me.
